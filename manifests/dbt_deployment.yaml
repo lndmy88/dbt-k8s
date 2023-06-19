@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dbt
+  name: dbt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbt
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dbt
+    spec:
+      containers:
+        - image: lndmy/dbt-k8s
+          name: dbt
+          resources: {}
+          volumeMounts:
+            - name: hostvol
+              mountPath: /usr/src/dbt
+      restartPolicy: Always
+      volumes:
+        - name: hostvol
+          hostPath:
+            path: /home/ec2-user/environment/dbt-k8s #absolute path
