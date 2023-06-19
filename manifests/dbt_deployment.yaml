@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: dbt
+    app: dbt-k8s
   name: dbt
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dbt
+      app: dbt-k8s
   strategy:
     type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: dbt
+        app: dbt-k8s
     spec:
       containers:
         - image: lndmy/dbt-k8s
